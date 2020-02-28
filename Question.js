@@ -15,6 +15,9 @@
         //return correctAnswer
 
     //setFalseAnswer(String)
+        //was thinking to have a loop that allows for 3 "falseAnswer"
+        //for 3 inputs
+            //set in falseAnswer[i]
 
-    //getFalseAnswer()
-        //return falseAnswer
+    //getFalseAnswer(index)
+        //return falseAnswer[index]
