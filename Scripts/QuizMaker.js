@@ -41,27 +41,49 @@ Answer key
 
 */
 
-let addQuestionBtn = document.getElementById('addBtn');
+let addQuestionBtn = document.getElementById('addQuestionBtn');
 let submitBtn = document.getElementById('submitBtn');
-let newQueston = document.getElementById('question'); //text from question text box
-let correctBtn = document.getElementById('correctBtn');
+let addFalseBtn = document.getElementById('addFalseAnswerBtn');
+ //text from question text box
+// let correctAnswer = document.getElementById('correctAnswerInput').value;
+// let falseAnswer = document.getElementById('falseAnswerInput').value;
+// let correctBtn = document.getElementById('correctBtn');
 
 Question testQuestion = new Question();
 
 submitBtn.addEventListener('submit', addQuestion);
-correctBtn.addEventListener('submit', addCorrectAnswer);
+addFalseBtn.addEventListener('click', addFalseAsnwer);
 
-function addQuestion(e){
-    testQuestion.setQuestion(e);
+//TO-DO
+// addQuestionBtn.addEventListener('click', makeNewQuestion);
+
+// correctBtn.addEventListener('submit', addCorrectAnswer);
+
+function addQuestion(){
+    //TO-DO
+    //check if text box is empty
+    //if true
+        //give error message
+
+    let newQueston = document.getElementById('questionInput').value;
+    testQuestion.setQuestion(newQuestion);
     addCorrectAnswer();
 }
 
-function addCorrectAnswer(e){
+function addCorrectAnswer(){
+    //TO-DO
+    //check if the correct input box is empty
+        //if true
+            //give an error
+
     //variable for the input
-    let answer = document.getElementById('item').value;
+    let answer = document.getElementById('correctAnswerInput').value;
 
     //create correct answer box/button
-
-
     testQuestion.setCorrectAnswer(answer);
+}
+
+function addFalseAsnwer(e){
+    let falseAnswer = document.getElementById('falseAnswerInput').value;
+    testQuestion.setFalseAnswer(falseAnswer);
 }
