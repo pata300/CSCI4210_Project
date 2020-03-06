@@ -19,23 +19,23 @@ function addQuestion(){
 function addMoreFalseAnswer(){
 
 }
-function getInitialThree{
+function getInitialThree(){
     question = document.getElementById('questionInput');
     cAnswer = document.getElementById("correctAnswerInput");
     fAnswer =document.getElementById("falseAnswerInput");
 }
-function inputToString{
+function inputToString(){
     question=question.value;
      cAnswer=cAnswer.value;
      fAnswer[0]=fAnswer.value;
 }
-function setData{
+function setData(){
      questionObj.setQuestion(question);
      questionObj.setCorrectAnswer(cAnswer);
      questionObj.setFalseAnswer(fAnswer);
      questionArray[numberOfQuestions] =questionObj;
 }
-function incNumQuestions{
+function incNumQuestions(){
     numberOfQuestions++;
 }
 
