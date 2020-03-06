@@ -1,4 +1,4 @@
-let submit = document.getElementById('submit');
+let submit = document.getElementById('submitBtn');
 let numberOfQuestions=0;
 let questionArray=[Question];
 let question;
