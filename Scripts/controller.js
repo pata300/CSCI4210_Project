@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+let submit = document.getElementById('submitBtn');
+>>>>>>> a75eb0c5603493e4568d655ed19ecf6613dec36a
 let numberOfQuestions=0;
 let questionArray=[Question];
 let question;
