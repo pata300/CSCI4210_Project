@@ -49,6 +49,7 @@ let addFalseBtn = document.getElementById('addFalseAnswerBtn');
 // let falseAnswer = document.getElementById('falseAnswerInput').value;
 // let correctBtn = document.getElementById('correctBtn');
 
+//if you take out the identifier and just type testQuestion = new Question(); it should work
 Question testQuestion = new Question();
 
 submitBtn.addEventListener('submit', addQuestion);
