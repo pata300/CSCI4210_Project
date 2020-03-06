@@ -1,12 +1,16 @@
-let submit = document.getElementById('submit');
+
 let numberOfQuestions=0;
 let questionArray=[Question];
 let question;
 let cAnswer;
 let fAnswer= new [];
 let numFAnswers=0;
+
+let submit = document.getElementById('submit');
+let submitNumOfFalse = document.getElementById('numOfFalse')
 questionObj= new Question();
 submit.addEventListener('click',addQuestion);
+
 //currently only takes in the base 3 input boxes and doesnt allow adding extra false answers or creating a new question
 //questions are stores as question objects in questionArray
 function addQuestion(){
