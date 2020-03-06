@@ -49,8 +49,7 @@ let addFalseBtn = document.getElementById('addFalseAnswerBtn');
 // let falseAnswer = document.getElementById('falseAnswerInput').value;
 // let correctBtn = document.getElementById('correctBtn');
 
-//if you take out the identifier and just type testQuestion = new Question(); it should work
-Question testQuestion = new Question();
+testQuestion = new Question();
 
 submitBtn.addEventListener('submit', addQuestion);
 addFalseBtn.addEventListener('click', addFalseAsnwer);
@@ -61,30 +60,43 @@ addFalseBtn.addEventListener('click', addFalseAsnwer);
 // correctBtn.addEventListener('submit', addCorrectAnswer);
 
 function addQuestion(){
-    //TO-DO
-    //check if text box is empty
-    //if true
-        //give error message
-
     let newQueston = document.getElementById('questionInput').value;
-    testQuestion.setQuestion(newQuestion);
-    addCorrectAnswer();
+    try{
+        if(newQueston.length() == 0) throw "empty";
+    }
+    catch(err){
+        alert("The question is " + err);
+    }
+    finally{
+        testQuestion.setQuestion(newQuestion);
+        addCorrectAnswer();
+    }
 }
 
 function addCorrectAnswer(){
-    //TO-DO
-    //check if the correct input box is empty
-        //if true
-            //give an error
-
     //variable for the input
     let answer = document.getElementById('correctAnswerInput').value;
-
-    //create correct answer box/button
-    testQuestion.setCorrectAnswer(answer);
+    
+    try{
+        if(answer.length() == 0) throw "empty";
+    }
+    catch(err){
+        alert("The correct answer is " + err);
+    }
+    finally{
+        //create correct answer box/button
+        testQuestion.setCorrectAnswer(answer);
+    }
 }
 
-function addFalseAsnwer(e){
+function addFalseAsnwer(){
     let falseAnswer = document.getElementById('falseAnswerInput').value;
+    try{
+        if(falseAnswer.length() == 0) throw "empty";
+    }
+    catch(err){
+        alert("The incorrect answer is " + err);
+    }
+    finally{
     testQuestion.setFalseAnswer(falseAnswer);
 }
