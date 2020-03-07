@@ -1,3 +1,18 @@
-#falseAnswerInput{
-    display: hidden;
+#falseAnswerInput1{
+    display: none;
+}
+#falseAnswerInput2{
+    display: none;
+}
+#falseAnswerInput3{
+    display: none;
+}
+#falseAnswerInput4{
+    display: none;
+}
+#falseAnswerInput5{
+    display: none;
+}
+#falseAnswerInput6{
+    display: none;
 }

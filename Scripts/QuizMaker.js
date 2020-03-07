@@ -52,7 +52,7 @@ let addFalseBtn = document.getElementById('addFalseAnswerBtn');
 testQuestion = new Question();
 
 submitBtn.addEventListener('submit', addQuestion);
-addFalseBtn.addEventListener('click', addFalseAsnwer);
+//addFalseBtn.addEventListener('click', addFalseAsnwer);
 
 //TO-DO
 // addQuestionBtn.addEventListener('click', makeNewQuestion);
@@ -89,7 +89,7 @@ function addCorrectAnswer(){
     }
 }
 
-function addFalseAsnwer(){
+/*function addFalseAsnwer(){
     let falseAnswer = document.getElementById('falseAnswerInput').value;
     try{
         if(falseAnswer.length() == 0) throw "empty";
@@ -99,4 +99,5 @@ function addFalseAsnwer(){
     }
     finally{
     testQuestion.setFalseAnswer(falseAnswer);
-}
+    }
+}*/

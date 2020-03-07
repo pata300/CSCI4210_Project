@@ -2,7 +2,7 @@ class Question{
     constructor(){
         this.question;
         this.correctAnswer;
-        this.falseAnswers;
+        this.falseAnswers= new Array();
         this.numberOfFalseAnswers=0;
     }
 
@@ -37,8 +37,8 @@ class Question{
     //getCorrectAnswer()
         //return correctAnswer
     setFalseAnswer(falseAnswer){
-        this.falseAnswers[this.numberOfFalseAnswers]=falseAnswer;
-        this.numberOfFalseAnswers++;
+        this.falseAnswers=falseAnswer;
+        
         
         
     }
