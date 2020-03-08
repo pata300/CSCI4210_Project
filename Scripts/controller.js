@@ -5,57 +5,73 @@ let questionArray=[Question];
 let question;
 let cAnswer;
 let fAnswer= new Array();
-let numFAnswers;
-let arrayPos
+let numFAnswers = 1;
+let arrayPos;
 
 let submit = document.getElementById('submitBtn');
 let submitNumOfFalse = document.getElementById('numOfFalse');
-questionObj= new Question();
+questionObj = new Question();
 submit.addEventListener('click',addQuestion);
 submitNumOfFalse.addEventListener('click',showBoxes);
 //currently only takes in the base 3 input boxes and doesnt allow adding extra false answers or creating a new question
 //questions are stores as question objects in questionArray
 function addQuestion(){
-   getInitialThree();
+   console.log("controller addQuestion");
+   submitQuestion();
    inputToString();
-   setData();
+//    setData(question, cAnswer, fAnswer);
    incNumQuestions();
+   console.log("obj values " + questionObj.getQuestion(), questionObj.getCorrectAnswer(), questionObj.getFalseAnswer(), questionArray.length);
+   console.log("end of addQuestion");
 }
 
 function addMoreFalseAnswer(){
 
 }
-function getInitialThree(){
-    question = document.getElementById('questionInput');
-    cAnswer = document.getElementById("correctAnswerInput");
-   getFalseInput();
+function submitQuestion(){
+    questionObj= new Question(); //creates new Question obj each time you click the submit button
+    question = document.getElementById('questionInput').value;
+    cAnswer = document.getElementById("correctAnswerInput").value;
+    console.log("question is " + question + " and correct answer is " + cAnswer);
+    setData(question, cAnswer);
+    getFalseInput();
+    addQuestionToArray(questionObj);
+    console.log(questionArray);
+    alert("Question submitted");
+    resetPage();
 }
+
 function getFalseInput(){
      arrayPos=0;
     if(numFAnswers>=1){
-        fAnswer[0]=document.getElementById('falseAnswerInput1');
+        fAnswer[0]=document.getElementById('falseAnswerInput1').value;
         arrayPos++;
     }
     if(numFAnswers>=2){
-        fAnswer[1]=document.getElementById('falseAnswerInput2');
+        fAnswer[1]=document.getElementById('falseAnswerInput2').value;
         arrayPos++;
     }
     if(numFAnswers>=3){
-        fAnswer[2]=document.getElementById('falseAnswerInput3');
+        fAnswer[2]=document.getElementById('falseAnswerInput3').value;
         arrayPos++;
     }
     if(numFAnswers>=4){
-        fAnswer[3]=document.getElementById('falseAnswerInput4');
+        fAnswer[3]=document.getElementById('falseAnswerInput4').value;
         arrayPos++;
     }
     if(numFAnswers>=5){
-        fAnswer[4]=document.getElementById('falseAnswerInput5');
+        fAnswer[4]=document.getElementById('falseAnswerInput5').value;
         arrayPos++;
     }
     if(numFAnswers>=6){
-        fAnswer[5]=document.getElementById('falseAnswerInput6');
+        fAnswer[5]=document.getElementById('falseAnswerInput6').value;
         arrayPos++;
     }
+    for(i=0;i<=numFAnswers-1;i++){    
+        console.log("false answers " + fAnswer[i]);
+       
+    }
+    questionObj.setFalseAnswer(fAnswer);
 }
 function inputToString(){
     question=question.value;
@@ -64,14 +80,45 @@ function inputToString(){
      fAnswer[i]=fAnswer[i].value;
      }
 }
-function setData(){
+function setData(question, cAnswer){
+    console.log("set data " + question, cAnswer);
      questionObj.setQuestion(question);
      questionObj.setCorrectAnswer(cAnswer);
-     questionObj.setFalseAnswer(fAnswer);
-     questionArray[numberOfQuestions] =questionObj;
+    //  questionObj.setFalseAnswer(fAnswer);
+     
 }
 function incNumQuestions(){
     numberOfQuestions++;
+}
+
+function addQuestionToArray(currentQuestion){
+    questionArray[numberOfQuestions] = questionObj;
+}
+
+function resetPage(){
+    box = [ document.getElementById('falseAnswerInput1'),
+            document.getElementById('falseAnswerInput2'),
+            document.getElementById('falseAnswerInput3'),
+            document.getElementById('falseAnswerInput4'),
+            document.getElementById('falseAnswerInput5'),
+            document.getElementById('falseAnswerInput6')];
+    
+    let questionInput = document.getElementById('questionInput');
+    let correctAnswerInput = document.getElementById('correctAnswerInput');
+
+    questionInput.value = '';
+    correctAnswerInput.value = '';
+
+    for(i=0; i < 6; i++){
+        element = box[i];
+        element.style.display = "none";
+        element.value = '';
+    }
+
+    firstFalse = box[0];
+    firstFalse.style.display = "block";
+    submitNumOfFalse.value = '1';
+
 }
 
 function showBoxes(){

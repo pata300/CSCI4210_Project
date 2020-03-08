@@ -1,4 +1,5 @@
 class Question{
+    
     constructor(){
         this.question;
         this.correctAnswer;
@@ -36,15 +37,16 @@ class Question{
     }
     //getCorrectAnswer()
         //return correctAnswer
-    setFalseAnswer(falseAnswer){
-        this.falseAnswers=falseAnswer;
-        
-        
-        
+    setFalseAnswer(falseAnswers = new Array()){
+        for (i=0; i < falseAnswers.length; i++){
+            this.falseAnswers[i] = falseAnswers[i];
+        }
+        // this.falseAnswers=falseAnswer;
+        console.log(this.falseAnswers);
     }
     //setFalseAnswer(String)
-    getFalseAnswer(index){
-        return this.falseAnswer[0];
+    getFalseAnswer(){
+        return this.falseAnswers;
     }
     
     //getFalseAnswer()

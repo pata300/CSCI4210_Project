@@ -61,6 +61,7 @@ submitBtn.addEventListener('submit', addQuestion);
 
 function addQuestion(){
     let newQueston = document.getElementById('questionInput').value;
+    console.log('addQuestoin executed');
     try{
         if(newQueston.length() == 0) throw "empty";
     }
@@ -76,7 +77,7 @@ function addQuestion(){
 function addCorrectAnswer(){
     //variable for the input
     let answer = document.getElementById('correctAnswerInput').value;
-    
+    console.log('addCorrectAnswer executed');
     try{
         if(answer.length() == 0) throw "empty";
     }
