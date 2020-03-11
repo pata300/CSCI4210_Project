@@ -44,6 +44,10 @@ class Question{
         // this.falseAnswers=falseAnswer;
         console.log(this.falseAnswers);
     }
+    setNumFAnswers(num){
+        
+        this.numberOfFalseAnswers = num;
+    }
     //setFalseAnswer(String)
     getFalseAnswer(){
         return this.falseAnswers;

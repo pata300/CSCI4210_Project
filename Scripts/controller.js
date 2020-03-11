@@ -25,9 +25,7 @@ function addQuestion(){
    console.log("end of addQuestion");
 }
 
-function addMoreFalseAnswer(){
 
-}
 function submitQuestion(){
     questionObj= new Question(); //creates new Question obj each time you click the submit button
     question = document.getElementById('questionInput').value;
@@ -36,6 +34,7 @@ function submitQuestion(){
     setData(question, cAnswer);
     getFalseInput();
     addQuestionToArray(questionObj);
+    setNumFAnswers2();
     console.log(questionArray);
     alert("Question submitted");
     resetPage();
@@ -87,6 +86,12 @@ function setData(question, cAnswer){
     //  questionObj.setFalseAnswer(fAnswer);
      
 }
+function setNumFAnswers2(){
+    let temp = document.getElementById('numOfFalse');
+    temp = temp.value;
+    questionObj.setNumFAnswers(temp);
+}
+
 function incNumQuestions(){
     numberOfQuestions++;
 }
