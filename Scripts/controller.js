@@ -10,9 +10,11 @@ let arrayPos;
 
 let submit = document.getElementById('submitBtn');
 let submitNumOfFalse = document.getElementById('numOfFalse');
+let quizBtn = document.getElementById('getQuizBtn');
 questionObj = new Question();
 submit.addEventListener('click',addQuestion);
 submitNumOfFalse.addEventListener('click',showBoxes);
+quizBtn.addEventListener('click', openQuiz);
 //currently only takes in the base 3 input boxes and doesnt allow adding extra false answers or creating a new question
 //questions are stores as question objects in questionArray
 function addQuestion(){
@@ -98,6 +100,14 @@ function incNumQuestions(){
 
 function addQuestionToArray(currentQuestion){
     questionArray[numberOfQuestions] = questionObj;
+}
+
+function openQuiz(){
+    getQuestions(questionArray);
+    printQuiz();
+    let quizPage = window.open("quiz.html", "_blank");
+    console.log(quizPage);
+    console.log("quiz page is created");
 }
 
 function resetPage(){
