@@ -10,48 +10,82 @@ Answer key
 */
 
 // testQuestion = new Question();
-let quizArray= [typeof Question];
+let quizArray = [];
 
+// document.addEventListener("DOMContentLoaded", startQuizMaker);
+// window.addEventListener('load', startQuizMaker);
 
-function getQuestions(questionArray){
-    quizArray = questionArray;
-    console.log(quizArray);
-}
 
 function printQuiz(){
+    console.log("printing quiz");
     let currentDiv = document.getElementById("defaultDiv");
+    let qNum;
     for(let i = 0; i < quizArray.length; i++){
-        let questionDiv = document.createElement("div", {is: "question" + i});
-        questionDiv.appendChild(buildQuestion(quizArray[i]));
+        console.log(quizArray[i]);
+        let questionDiv = document.createElement("div");
+        questionDiv.id = "question" + i;
+        qNum = i + 1;
+        numToText = qNum.toString();
+        questionDiv.appendChild(buildQuestion(quizArray[i], numToText));
+        console.log(questionDiv);
+        console.log(currentDiv);
         document.body.insertBefore(questionDiv, currentDiv);
+        // document.body.innerText = quizArray[i].getQuestion();
         
         let questionAnswers = [];
+
         questionAnswers = randomizeAnswers(quizArray[i].getFalseAnswer(), quizArray[i].getCorrectAnswer());
         for(let j = 0; j < questionAnswers.length; j++){
-            let answerP = document.createElement("p", {is: "answer" + j});
+            let answerP = document.createElement("p");
+            answerP.id = "answer";
+            answerP.style = "padding-left: 50px;";
             answerP.appendChild(document.createTextNode(questionAnswers[j]));
             document.body.insertBefore(answerP, currentDiv);
         }
 
-        
+        printKey(quizArray[i].getCorrectAnswer(), qNum);
+
     }
+    console.log("printing complete");
 }
+
+function printKey(answer, questionNum){
+    console.log(answer + " " + questionNum);
+    let currentDiv = document.getElementById("keyDiv");
+    let answerDiv = document.createElement("div");
+    answerDiv.id = "answer";
+    console.log(currentDiv);
+    console.log(answerDiv);
+    answerDiv.appendChild(document.createTextNode(questionNum + ") " + answer));
+    document.body.insertBefore(answerDiv, currentDiv);
+}
+
+//TO-DO
+//print answer function
+//print formatting
 
 //creates a text node from the question variable from the Question obj
-function buildQuestion(question){
-    return document.createTextNode(question.getQuestion());
+function buildQuestion(question, number){
+    console.log("Building question");
+    console.log(question.getQuestion());
+    console.log(number);
+    return document.createTextNode(number + ") " + question.getQuestion());
 }
 
-function randomizeAnswers(fAnswers, cAnswer){
+function randomizeAnswers(fAnswers = [], cAnswer){
     let empty = false;
+    console.log(fAnswers);
     fAnswers.push(cAnswer);
+    console.log("fAnswer after: " + fAnswers);
     let answers = [];
     while(!empty){
-        let index = Math.floor(Math.random() * fAnswers.length);
-        answers.push(fAnswers[index]);
-        fAnswers = swapToEnd(index, fAnswers);
+        
+        let rndIndex = Math.floor(Math.random() * fAnswers.length);
+        answers.push(fAnswers[rndIndex]);
+        fAnswers = swapToEnd(rndIndex, fAnswers);
         fAnswers.pop();
-        if(fAnswers.length == 0){
+        
+        if(fAnswers.length <= 0){
             empty = true;
         }
     }
@@ -59,53 +93,35 @@ function randomizeAnswers(fAnswers, cAnswer){
     return answers;
 }
 
-function swapToEnd(i, answer){
+function swapToEnd(i, answer = []){
+    // console.log("swapping: " + answer);
     let temp = answer[answer.length - 1];
-    answer[answer.length] = answer[i];
+    answer[answer.length - 1] = answer[i];
     answer[i] = temp;
     return answer;
 }
 
-// function addQuestion(){
-//     let newQueston = document.getElementById('questionInput').value;
-//     console.log('addQuestoin executed');
-//     try{
-//         if(newQueston.length() == 0) throw "empty";
-//     }
-//     catch(err){
-//         alert("The question is " + err);
-//     }
-//     finally{
-//         testQuestion.setQuestion(newQuestion);
-//         addCorrectAnswer();
-//     }
-// }
+function convertToQuestion(questionArray){
+    console.log("convert objects to questions")
+    for(let i = 0; i < questionArray.length; i++){
+        let currentQuestion = new Question();
+        currentQuestion.setQuestion(questionArray[i].question);
+        currentQuestion.setCorrectAnswer(questionArray[i].correctAnswer);
+        currentQuestion.setFalseAnswer(questionArray[i].falseAnswers);
+        console.log(currentQuestion);
+        quizArray.push(currentQuestion);
+    }
+    console.log(quizArray);
+    console.log("conversion complete");
+}
 
-// function addCorrectAnswer(){
-//     //variable for the input
-//     let answer = document.getElementById('correctAnswerInput').value;
-//     console.log('addCorrectAnswer executed');
-//     try{
-//         if(answer.length() == 0) throw "empty";
-//     }
-//     catch(err){
-//         alert("The correct answer is " + err);
-//     }
-//     finally{
-//         //create correct answer box/button
-//         testQuestion.setCorrectAnswer(answer);
-//     }
-// }
+window.onload = function startQuizMaker(){
+    let questions = JSON.parse(localStorage.getItem('questions'));
+    console.log(questions);
+    //currently trying to figure out how ot make it a question object again
+    //might have to do a while loop to parse JSON array into question array
+    convertToQuestion(questions);
+    printQuiz();
+}
 
-/*function addFalseAsnwer(){
-    let falseAnswer = document.getElementById('falseAnswerInput').value;
-    try{
-        if(falseAnswer.length() == 0) throw "empty";
-    }
-    catch(err){
-        alert("The incorrect answer is " + err);
-    }
-    finally{
-    testQuestion.setFalseAnswer(falseAnswer);
-    }
-}*/
+startQuizMaker();

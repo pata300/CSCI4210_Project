@@ -38,7 +38,7 @@ class Question{
     //getCorrectAnswer()
         //return correctAnswer
     setFalseAnswer(falseAnswers = new Array()){
-        for (i=0; i < falseAnswers.length; i++){
+        for (let i=0; i < falseAnswers.length; i++){
             this.falseAnswers[i] = falseAnswers[i];
         }
         // this.falseAnswers=falseAnswer;
@@ -51,6 +51,10 @@ class Question{
     //setFalseAnswer(String)
     getFalseAnswer(){
         return this.falseAnswers;
+    }
+
+    toString(){
+        return this.question + "/n" + "correct answer: " + this.correctAnswer + "/n" + "false answers" + this.falseAnswers + "/n";
     }
     
     //getFalseAnswer()

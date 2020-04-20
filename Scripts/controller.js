@@ -8,6 +8,7 @@ let fAnswer= new Array();
 let numFAnswers = 1;
 let arrayPos;
 
+let updateMsg = document.getElementById('userUpdate');
 let submit = document.getElementById('submitBtn');
 let submitNumOfFalse = document.getElementById('numOfFalse');
 let quizBtn = document.getElementById('getQuizBtn');
@@ -15,6 +16,11 @@ questionObj = new Question();
 submit.addEventListener('click',addQuestion);
 submitNumOfFalse.addEventListener('click',showBoxes);
 quizBtn.addEventListener('click', openQuiz);
+let addFalseBtn = document.getElementById('addFalseAnswerBtn');
+addFalseBtn.addEventListener('click', incrementFalseAnswerCount);
+let subtractFalseBtn = document.getElementById('subtractFAnswerBtn');
+subtractFalseBtn.addEventListener('click', decrementFalseAnswerCount);
+
 //currently only takes in the base 3 input boxes and doesnt allow adding extra false answers or creating a new question
 //questions are stores as question objects in questionArray
 function addQuestion(){
@@ -38,8 +44,16 @@ function submitQuestion(){
     addQuestionToArray(questionObj);
     setNumFAnswers2();
     console.log(questionArray);
-    alert("Question submitted");
+    // alert("Question submitted");
+    updateMsg.innerText = "Question submitted";
+    updateMsg.style = "color: green;";
     resetPage();
+
+    setTimeout(clearUpdate, 5000);
+}
+
+function clearUpdate(){
+    updateMsg.innerText = "";
 }
 
 function getFalseInput(){
@@ -94,6 +108,34 @@ function setNumFAnswers2(){
     questionObj.setNumFAnswers(temp);
 }
 
+function incrementFalseAnswerCount(){
+    numFAnswers++;
+    if(numFAnswers == 6){
+        addFalseBtn.style = 'display: none;';
+    }
+    if(numFAnswers > 1){
+        subtractFalseBtn.style = 'display: true;';
+    }
+    console.log(numFAnswers);
+    submitNumOfFalse.value = numFAnswers;
+    showBoxes();
+}
+
+function decrementFalseAnswerCount(){
+    numFAnswers--;
+    console.log(numFAnswers);
+    if(numFAnswers == 1){
+        console.log("bye bye");
+        subtractFalseBtn.style = 'display: none;';
+    }
+    if(numFAnswers == 5){
+        addFalseBtn.style = 'dipslay: true;';
+    }
+
+    submitNumOfFalse.value = numFAnswers;
+    showBoxes();
+}
+
 function incNumQuestions(){
     numberOfQuestions++;
 }
@@ -103,10 +145,14 @@ function addQuestionToArray(currentQuestion){
 }
 
 function openQuiz(){
-    getQuestions(questionArray);
-    printQuiz();
-    let quizPage = window.open("quiz.html", "_blank");
-    console.log(quizPage);
+    // sessionStorage.setItem('score', points);
+    // window.location.href = "winPage.html";
+    // getQuestions(questionArray);
+    // printQuiz();
+    localStorage.clear();
+    localStorage.setItem('questions', JSON.stringify(questionArray));
+    window.open("quiz.html", "_blank");
+    // console.log(quizPage);
     console.log("quiz page is created");
 }
 
@@ -130,9 +176,13 @@ function resetPage(){
         element.value = '';
     }
 
+    addFalseBtn.style.display = 'true';
+    subtractFalseBtn.style.display = 'none';
+
     firstFalse = box[0];
     firstFalse.style.display = "block";
     submitNumOfFalse.value = '1';
+    numFAnswers = 1;
 
 }
 
