@@ -7,15 +7,23 @@ let cAnswer;
 let fAnswer= new Array();
 let numFAnswers = 1;
 let arrayPos;
+let quizObj;
+let quizArray = new Array();
 
 let updateMsg = document.getElementById('userUpdate');
 let submit = document.getElementById('submitBtn');
 let submitNumOfFalse = document.getElementById('numOfFalse');
 let quizBtn = document.getElementById('getQuizBtn');
 questionObj = new Question();
+
 submit.addEventListener('click',addQuestion);
 submitNumOfFalse.addEventListener('click',showBoxes);
 quizBtn.addEventListener('click', openQuiz);
+saveBtn.addEventListener('click',save);
+
+
+
+
 let addFalseBtn = document.getElementById('addFalseAnswerBtn');
 addFalseBtn.addEventListener('click', incrementFalseAnswerCount);
 let subtractFalseBtn = document.getElementById('subtractFAnswerBtn');
@@ -149,7 +157,7 @@ function openQuiz(){
     // window.location.href = "winPage.html";
     // getQuestions(questionArray);
     // printQuiz();
-    localStorage.clear();
+    //localStorage.clear();
     localStorage.setItem('questions', JSON.stringify(questionArray));
     window.open("quiz.html", "_blank");
     // console.log(quizPage);
@@ -185,6 +193,26 @@ function resetPage(){
     numFAnswers = 1;
 
 }
+function save(){
+     console.log("save");
+     let numQuiz =1;
+     quizObj = new Quiz();
+     quizObj.addQuestionArrayToQuiz(questionArray);
+     quizObj.setName(document.getElementById('nameInput').value);
+     if(localStorage.getItem('quizes'!= null)){
+         quizArray = JSON.parse(localStorage.getItem('quizes'));
+     }
+     if(localStorage.getItem('numQuiz' != null)){
+         numQuiz = JSON.parse(localStorage.getItem('numQuiz'));
+     }
+     quizArray.push(quizObj);
+     numQuiz++;
+     localStorage.setItem('quizes',JSON.stringify(quizArray));
+     localStorage.setItem('numQuiz',JSON.stringify(numQuiz));
+}
+
+
+
 
 function showBoxes(){
     numFAnswers = document.getElementById('numOfFalse');

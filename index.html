@@ -27,6 +27,7 @@
         <div class="container">
 
                 <div>
+                    <input type='text' placeholder="Name Quiz" id='nameInput'>
                     <input type="text" placeholder="Question" id="questionInput">
                 </div>  
                 <input type='text' placeholder="Correct Answer" id='correctAnswerInput'>
@@ -58,6 +59,10 @@
             
             <button id='submitBtn'>Submit Current Question</button>
             <button id='getQuizBtn'>Create Quiz</button>
+            <div>
+                <button id='saveBtn'>Save</button>
+                <a href="storage.html">View Saved Quizes</a>
+            </div>
 
 
             <h3 id="userUpdate" class="p-4"></h3>
@@ -70,6 +75,7 @@
         <!--Remember to put classes (aka js files that are capitalized) first in the stack of scripts-->
         <script src="Scripts/Question.js"></script>
         <!-- <script src="Scripts/QuizMaker.js"></script> -->
+        <script src="Scripts/Quiz.js"></script>
         <script src="Scripts/controller.js"></script>
         
     </body>
