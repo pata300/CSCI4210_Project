@@ -7,7 +7,7 @@
  removeBTN.addEventListener('click',removeQuiz);
  
 function displaySavedQuizes(){  
-    quizArray = JSON.parse(localStorage.getItem('quizes'));
+    parseQuiz();
     for(let i=0;i<quizArray.length;i++){
         if(quizArray[i]!=null){
             document.getElementById("quizes").children[0].innerHTML += "<li>"+quizArray[i].quizName+"</li>";
@@ -15,27 +15,41 @@ function displaySavedQuizes(){
     }
 }
 function printQuiz(){
-    quizArray = JSON.parse(localStorage.getItem('quizes'));
+    parseQuiz();
     for(let i=0;i<quizArray.length;i++){
-        if(quizArray[i].quizName==quizName.value){
-            localStorage.setItem('questions',JSON.stringify(quizArray[i].quizQuestions));
-            window.open("quiz.html", "_blank");
-            console.log("quiz page is created"); 
+        if(quizArray[i !=null]){
+            if(quizArray[i].quizName==quizName.value){
+                localStorage.setItem('questions',JSON.stringify(quizArray[i].quizQuestions));
+                window.open("quiz.html", "_blank");
+                console.log("quiz page is created"); 
+            }else{
+                console.log("quiz not found")
+            }
+        }else{
+            console.log("there are no saved quizes")
         }
     }
 }
 function removeQuiz(){
-    console.log('remove');
-    quizArray = JSON.parse(localStorage.getItem('quizes'));
+    console.log('removing quiz from localstorage');
+    parseQuiz();
     for(let i=0;i<quizArray.length;i++){
         if(quizArray[i]!=null){
             if(quizArray[i].quizName==quizName.value){
                 delete quizArray[i];
                 localStorage.setItem('quizes',JSON.stringify(quizArray));
                 location.reload();
+            }else{
+                console.log("quiz not found")
             }
+        }else{
+            console.log("there are no saved quizes")
         }
     }
+}
+
+function parseQuiz(){
+    quizArray = JSON.parse(localStorage.getItem('quizes')); //localStorage stores as strings must us JSON.parse to get any non string back
 }
 
 displaySavedQuizes();
