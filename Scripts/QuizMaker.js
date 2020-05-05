@@ -9,82 +9,80 @@ Answer key
 
 */
 
-// testQuestion = new Question();
 let quizArray = [];
 
-// document.addEventListener("DOMContentLoaded", startQuizMaker);
-// window.addEventListener('load', startQuizMaker);
-
-
+//loops through the array of questions in the 'quiz'
+//prints out the question
+//  randomizes and prints potential questions
+//prints answer key at end of page
 function printQuiz(){
-    console.log("printing quiz");
+
     let currentDiv = document.getElementById("defaultDiv");
     let qNum;
     for(let i = 0; i < quizArray.length; i++){
-        console.log(quizArray[i]);
-        let questionDiv = document.createElement("div");
-        questionDiv.id = "question" + i;
+        
         qNum = i + 1;
         numToText = qNum.toString();
-        questionDiv.appendChild(buildQuestion(quizArray[i], numToText));
-        console.log(questionDiv);
-        console.log(currentDiv);
-        document.body.insertBefore(questionDiv, currentDiv);
-        // document.body.innerText = quizArray[i].getQuestion();
+        printQuestion(quizArray[i], numToText, currentDiv);
         
         let questionAnswers = [];
 
         questionAnswers = randomizeAnswers(quizArray[i].getFalseAnswer(), quizArray[i].getCorrectAnswer());
-        for(let j = 0; j < questionAnswers.length; j++){
-            let answerP = document.createElement("p");
-            answerP.id = "answer";
-            answerP.style = "padding-left: 50px;";
-            answerP.appendChild(document.createTextNode(questionAnswers[j]));
-            document.body.insertBefore(answerP, currentDiv);
-        }
+        printAnswers(questionAnswers, currentDiv);
 
         printKey(quizArray[i].getCorrectAnswer(), qNum);
 
     }
-    console.log("printing complete");
+}
+
+function printQuestion(question, num, div){
+    //creates a div
+    let questionDiv = document.createElement("div");
+    questionDiv.id = "question" + num;
+        
+    //inserts div into HTML
+    questionDiv.appendChild(buildQuestion(question, num));
+    document.body.insertBefore(questionDiv, div);
+}
+
+function printAnswers(answers, div){
+    for(let j = 0; j < answers.length; j++){
+        //creates a p element    
+        let answerP = document.createElement("p");
+        //gives the element a id and formatting
+        answerP.id = "answer";
+        answerP.style = "padding-left: 50px;";
+        //inserts element into HTML
+        answerP.appendChild(document.createTextNode(answers[j]));
+        document.body.insertBefore(answerP, div);
+    }
 }
 
 function printKey(answer, questionNum){
-    console.log(answer + " " + questionNum);
     let currentDiv = document.getElementById("keyDiv");
     let answerDiv = document.createElement("div");
     answerDiv.id = "answer";
-    console.log(currentDiv);
-    console.log(answerDiv);
     answerDiv.appendChild(document.createTextNode(questionNum + ") " + answer));
     document.body.insertBefore(answerDiv, currentDiv);
 }
 
-//TO-DO
-//print answer function
-//print formatting
-
 //creates a text node from the question variable from the Question obj
 function buildQuestion(question, number){
-    console.log("Building question");
-    console.log(question.getQuestion());
-    console.log(number);
     return document.createTextNode(number + ") " + question.getQuestion());
 }
 
+//randomizes given false answers along with a correct answers
 function randomizeAnswers(fAnswers = [], cAnswer){
     let empty = false;
-    console.log(fAnswers);
-    fAnswers.push(cAnswer);
-    console.log("fAnswer after: " + fAnswers);
-    let answers = [];
+    fAnswers.push(cAnswer);//push the correct answer into the false answer array
+    let answers = [];//create an empty array for the randomization
     while(!empty){
-        
+        //get a random number for the index between 0 and the length of false answers array
         let rndIndex = Math.floor(Math.random() * fAnswers.length);
-        answers.push(fAnswers[rndIndex]);
-        fAnswers = swapToEnd(rndIndex, fAnswers);
-        fAnswers.pop();
-        
+        answers.push(fAnswers[rndIndex]);//push random selected answer into new array
+        fAnswers = swapToEnd(rndIndex, fAnswers);//swap random selected element to the end
+        fAnswers.pop();//remove it from the old array
+        //checks if all elements have been popped/removed
         if(fAnswers.length <= 0){
             empty = true;
         }
@@ -94,7 +92,6 @@ function randomizeAnswers(fAnswers = [], cAnswer){
 }
 
 function swapToEnd(i, answer = []){
-    // console.log("swapping: " + answer);
     let temp = answer[answer.length - 1];
     answer[answer.length - 1] = answer[i];
     answer[i] = temp;
@@ -102,24 +99,17 @@ function swapToEnd(i, answer = []){
 }
 
 function convertToQuestion(questionArray){
-    console.log("convert objects to questions")
     for(let i = 0; i < questionArray.length; i++){
         let currentQuestion = new Question();
         currentQuestion.setQuestion(questionArray[i].question);
         currentQuestion.setCorrectAnswer(questionArray[i].correctAnswer);
         currentQuestion.setFalseAnswer(questionArray[i].falseAnswers);
-        console.log(currentQuestion);
         quizArray.push(currentQuestion);
     }
-    console.log(quizArray);
-    console.log("conversion complete");
 }
 
 window.onload = function startQuizMaker(){
     let questions = JSON.parse(localStorage.getItem('questions'));
-    console.log(questions);
-    //currently trying to figure out how ot make it a question object again
-    //might have to do a while loop to parse JSON array into question array
     convertToQuestion(questions);
     printQuiz();
 }
