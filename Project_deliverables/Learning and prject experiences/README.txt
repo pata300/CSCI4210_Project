@@ -1,0 +1,1 @@
+We chose to put our learning experience in text form rather than in the project demo because it was easier than trying to get everybody's mic recording in.
