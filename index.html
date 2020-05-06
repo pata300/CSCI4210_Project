@@ -6,7 +6,7 @@
         <link href='index.css' rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
-    <body> 
+    <body class="bg-secondary"> 
         <header id="main-header" class="bg-dark text-white p-4 mb-3">
             <div class="container">
               <div class="row">
@@ -18,55 +18,61 @@
         </header>
 
         <div class="container">
+            <div class="card card-body">
 
-                <div>
+                <div class="p-1 pb-3">
                     <input type='text' placeholder="Name Quiz" id='nameInput'>
-                    <br>
+                </div>
+                <div class="p-1">
                     <input type="text" placeholder="Question" id="questionInput">
                 </div>  
-                <input type='text' placeholder="Correct Answer" id='correctAnswerInput'>
+                <diV class="p-1">
+                    <input type='text' placeholder="Correct Answer" id='correctAnswerInput'>
+                </diV>
                 
-                <div>
+                <div class="p-1">
                     <label for='numOfFalse' >Number of false answer between 1-6:</label>
                     <input type='number' id='numOfFalse' name=' How many false answers' min='1' max='6' value='1'>
                     <button style="display: none;" id='subtractFAnswerBtn'> - </button>
                     <button id='addFalseAnswerBtn'> + </button>
                 </div>
-                <div>
+                <div class="p-1">
                     <input  type='text' placeholder="False Answer" id='falseAnswerInput1'>
                 </div>
-                <div>
-                <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput2'>
+                <div class="p-1">
+                    <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput2'>
                 </div>
-                <div>
+                <div class="p-1">
                     <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput3'>
                 </div>
-                <div>
+                <div class="p-1">
                     <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput4'>
                 </div>
-                <div>
+                <div class="p-1">
                     <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput5'>
                 </div>
-                <div>
+                <div class="p-1">
                     <input class='hide' type='text' placeholder="False Answer" id='falseAnswerInput6'>
                 </div>
-            
-            <button id='submitBtn'>Submit Current Question</button>
-            <br>
-            <button id='getQuizBtn'>Create Quiz</button>
-            <div>
-                <button id='saveBtn'>Save</button>
-                <br>
-                <a href="storage.html">View Saved Quizzes</a>
+                <div class="p-1">
+                    <button id='submitBtn'>Submit Current Question</button>
+                    <button id='getQuizBtn'>Create Quiz</button>
+                </div>
+                
+                <div class="p-1 pt-3">
+                    <button id='saveBtn'>Save</button>
+                    <a href="storage.html">View Saved Quizes</a>
+                </div>
+                <h3 id="userUpdate" class="p-4"></h3>
+
             </div>
-            <h3 id="userUpdate" class="p-4"></h3>
+
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <!--Remember to put classes (aka js files that are capitalized) first in the stack of scripts-->
         <script src="Scripts/Question.js"></script>
-        <!-- <script src="Scripts/QuizMaker.js"></script> -->
         <script src="Scripts/Quiz.js"></script>
         <script src="Scripts/controller.js"></script>
         
