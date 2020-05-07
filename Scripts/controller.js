@@ -32,13 +32,10 @@ subtractFalseBtn.addEventListener('click', decrementFalseAnswerCount);
 //currently only takes in the base 3 input boxes and doesnt allow adding extra false answers or creating a new question
 //questions are stores as question objects in questionArray
 function addQuestion(){
-   console.log("controller addQuestion");
    submitQuestion();
    inputToString();
-//    setData(question, cAnswer, fAnswer);
+
    incNumQuestions();
-   console.log("obj values " + questionObj.getQuestion(), questionObj.getCorrectAnswer(), questionObj.getFalseAnswer(), questionArray.length);
-   console.log("end of addQuestion");
 }
 
 
@@ -46,13 +43,12 @@ function submitQuestion(){
     questionObj= new Question(); //creates new Question obj each time you click the submit button
     question = document.getElementById('questionInput').value;
     cAnswer = document.getElementById("correctAnswerInput").value;
-    console.log("question is " + question + " and correct answer is " + cAnswer);
+    
     setData(question, cAnswer);
     getFalseInput();
     addQuestionToArray(questionObj);
     setNumFAnswers2();
-    console.log(questionArray);
-    // alert("Question submitted");
+    
     updateMsg.innerText = "Question submitted";
     updateMsg.style = "color: green;";
     resetPage();
@@ -104,10 +100,9 @@ function inputToString(){
      }
 }
 function setData(question, cAnswer){
-    console.log("set data " + question, cAnswer);
      questionObj.setQuestion(question);
      questionObj.setCorrectAnswer(cAnswer);
-    //  questionObj.setFalseAnswer(fAnswer);
+    
      
 }
 function setNumFAnswers2(){
@@ -124,16 +119,16 @@ function incrementFalseAnswerCount(){
     if(numFAnswers > 1){
         subtractFalseBtn.style = 'display: true;';
     }
-    console.log(numFAnswers);
+   
     submitNumOfFalse.value = numFAnswers;
     showBoxes();
 }
 
 function decrementFalseAnswerCount(){
     numFAnswers--;
-    console.log(numFAnswers);
+    
     if(numFAnswers == 1){
-        console.log("bye bye");
+        
         subtractFalseBtn.style = 'display: none;';
     }
     if(numFAnswers == 5){
@@ -153,15 +148,9 @@ function addQuestionToArray(currentQuestion){
 }
 
 function openQuiz(){
-    // sessionStorage.setItem('score', points);
-    // window.location.href = "winPage.html";
-    // getQuestions(questionArray);
-    // printQuiz();
-    //localStorage.clear();
+    
     localStorage.setItem('questions', JSON.stringify(questionArray));
     window.open("quiz.html", "_blank");
-    // console.log(quizPage);
-    console.log("quiz page is created");
 }
 
 function resetPage(){
@@ -194,7 +183,7 @@ function resetPage(){
 
 }
 function save(){
-     console.log("save");
+     
      let numQuiz =1;
      quizObj = new Quiz();
      quizObj.addQuestionArrayToQuiz(questionArray);
